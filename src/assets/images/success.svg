@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Green circle background -->
+  <circle cx="100" cy="100" r="90" fill="#4CAF50" />
+  
+  <!-- White checkmark -->
+  <path d="M80 130 L50 100 L65 85 L80 100 L135 45 L150 60 Z" fill="white" />
+  
+  <!-- Arabic text "أحسنت" -->
+  <text x="100" y="160" font-family="Arial" font-size="24" fill="white" text-anchor="middle">أحسنت!</text>
+</svg>

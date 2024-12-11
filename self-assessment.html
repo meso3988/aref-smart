@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقياس التقييم الذاتي للتعافي</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            margin: 20px;
+            background: #f9f9f9;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: relative;
+        }
+        .note {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #alias-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .question-step {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
+        }
+
+        .question-step.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .options label {
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        #next-btn {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #next-btn:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .intro p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>مقياس التقييم الذاتي للتعافي</h1>
+<div class="intro">
+    <p>يساعد هذا المقياس في تقييم مستوى تقدمك في رحلة التعافي</p>
+    <p>يشمل أسئلة حول الصحة النفسية، العلاقات الاجتماعية، والتطور الشخصي</p>
+</div>
+<p class="note">هذا التقييم للمساعدة في متابعة تقدمك الشخصي. استشر المختص المتابع لحالتك للحصول على تقييم شامل.</p>
+
+<div class="container">
+    <input type="text" id="alias-input" name="alias" placeholder="أدخل اسماً مستعاراً (اختياري)">
+
+    <form id="selfAssessmentForm">
+        <!-- السؤال 1 -->
+        <div class="question-step active">
+            <div class="question">
+                <p>1. هل تشعر بتحسن في قدرتك على التحكم في مشاعرك وانفعالاتك؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q1" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 2 -->
+        <div class="question-step">
+            <div class="question">
+                <p>2. هل تمارس أنشطة إيجابية جديدة تساعدك في الحفاظ على تعافيك؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q2" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 3 -->
+        <div class="question-step">
+            <div class="question">
+                <p>3. هل تحسنت علاقاتك الاجتماعية والأسرية خلال فترة تعافيك؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q3" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 4 -->
+        <div class="question-step">
+            <div class="question">
+                <p>4. هل تستطيع التعامل مع الضغوط اليومية بشكل أفضل من السابق؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q4" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 5 -->
+        <div class="question-step">
+            <div class="question">
+                <p>5. هل لديك خطة واضحة للمستقبل وأهداف تسعى لتحقيقها؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q5" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 6 -->
+        <div class="question-step">
+            <div class="question">
+                <p>6. هل تشعر بالثقة في قدرتك على الاستمرار في التعافي؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q6" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 7 -->
+        <div class="question-step">
+            <div class="question">
+                <p>7. هل تمارس تقنيات الاسترخاء أو التأمل بشكل منتظم؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q7" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 8 -->
+        <div class="question-step">
+            <div class="question">
+                <p>8. هل تشارك في مجموعات الدعم أو الجلسات العلاجية بانتظام؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q8" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 9 -->
+        <div class="question-step">
+            <div class="question">
+                <p>9. هل تشعر بتحسن في نمط نومك وطاقتك اليومية؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q9" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- السؤال 10 -->
+        <div class="question-step">
+            <div class="question">
+                <p>10. هل تمتلك شبكة دعم قوية تساندك في رحلة تعافيك؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="yes" required> نعم</label><br>
+                    <label><input type="radio" name="q10" value="no"> لا</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="next-btn">التالي</button>
+    </form>
+</div>
+
+<div id="result"></div>
+
+<script>
+    var currentStep = 0;
+    var steps = document.querySelectorAll('.question-step');
+    var nextBtn = document.getElementById('next-btn');
+    var selfAssessmentForm = document.getElementById('selfAssessmentForm');
+    var resultDiv = document.getElementById('result');
+
+    function showStep(index) {
+        steps.forEach(function(step, i) {
+            step.classList.remove('active');
+            if(i === index) {
+                step.classList.add('active');
+            }
+        });
+    }
+
+    function calculateResult() {
+        var formData = new FormData(selfAssessmentForm);
+        var score = 0;
+        for (var i = 1; i <= 10; i++) {
+            var answer = formData.get('q' + i);
+            if(answer === 'yes') score++;
+        }
+
+        var alias = document.getElementById('alias-input').value.trim();
+        var displayName = alias ? ("يا " + alias + "، ") : "";
+        
+        var resultText = "";
+        if (score <= 3) {
+            resultText = "أنت في بداية رحلة التعافي. نشجعك على الاستمرار في طلب المساعدة والدعم المهني.";
+        } else if (score <= 6) {
+            resultText = "أنت تحرز تقدماً جيداً. واصل العمل على تطوير مهاراتك وعلاقاتك الداعمة.";
+        } else if (score <= 8) {
+            resultText = "تقدمك ممتاز في رحلة التعافي. حافظ على هذا المستوى واستمر في تطوير نفسك.";
+        } else {
+            resultText = "أنت تظهر مستوى عالياً من التعافي والنمو الشخصي. استمر في مشاركة تجربتك ودعم الآخرين.";
+        }
+
+        resultDiv.innerHTML = displayName + "نتيجتك: " + score + "/10<br>" + resultText;
+    }
+
+    nextBtn.addEventListener('click', function() {
+        var inputs = steps[currentStep].querySelectorAll('input[type=radio]');
+        var answered = false;
+        inputs.forEach(function(input) {
+            if(input.checked) answered = true;
+        });
+        if(!answered) {
+            alert("يرجى اختيار إجابة قبل المتابعة.");
+            return;
+        }
+
+        currentStep++;
+        if(currentStep < steps.length) {
+            showStep(currentStep);
+            if(currentStep === steps.length - 1) {
+                nextBtn.textContent = "عرض النتيجة";
+            } else {
+                nextBtn.textContent = "التالي";
+            }
+        } else {
+            calculateResult();
+            selfAssessmentForm.style.display = 'none';
+        }
+    });
+
+    showStep(currentStep);
+</script>
+
+</body>
+</html>
