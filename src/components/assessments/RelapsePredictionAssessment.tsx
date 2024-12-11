@@ -210,77 +210,115 @@ const RelapsePredictionAssessment = () => {
     return (
       <div className="max-w-2xl mx-auto p-6">
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-center mb-6">نتيجة التقييم</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">نتيجة التقييم</h2>
           
-          <div className={`p-4 rounded-lg mb-6 border ${getResultStyle(result.color)}`}>
-            <h3 className="text-xl font-semibold mb-2">{result.level}</h3>
-            <p className="mb-4">{result.description}</p>
-            <div className="space-y-2">
-              <h4 className="font-semibold">التوصيات:</h4>
-              <ul className="list-disc list-inside space-y-1">
+          {/* نتيجة التقييم */}
+          <div className={`p-6 rounded-lg mb-6 border-2 ${getResultStyle(result.color)}`}>
+            <div className="flex items-center justify-center mb-4">
+              <AlertTriangle className={`w-12 h-12 ${
+                result.color === 'red' ? 'text-red-500' :
+                result.color === 'orange' ? 'text-orange-500' :
+                result.color === 'yellow' ? 'text-yellow-500' : 'text-green-500'
+              }`} />
+            </div>
+            <h3 className="text-2xl font-bold text-center mb-3">{result.level}</h3>
+            <p className="text-lg text-center mb-6">{result.description}</p>
+            <div className="space-y-4">
+              <h4 className="font-semibold text-lg">التوصيات:</h4>
+              <ul className="list-disc list-inside space-y-2">
                 {result.recommendations.map((rec, index) => (
-                  <li key={index}>{rec}</li>
+                  <li key={index} className="text-gray-700">{rec}</li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="bg-blue-50 p-4 rounded-lg mb-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Bot className="w-6 h-6 text-blue-600" />
-              <h4 className="font-semibold text-blue-800">تحليل عارف الذكي</h4>
+          {/* تحليل عارف الذكي */}
+          <div className="bg-blue-50 p-6 rounded-lg mb-6 border-2 border-blue-200">
+            <div className="flex items-center gap-3 mb-4">
+              <Bot className="w-8 h-8 text-blue-600" />
+              <h4 className="font-bold text-xl text-blue-800">تحليل عارف الذكي</h4>
             </div>
-            <p className="text-blue-900 mb-3">
-              {result.level === "خطر منخفض" && 
-                "يبدو أنك تتمتع بقدرة جيدة على التحكم في رغباتك وإدارة المواقف الصعبة. استمر في تطبيق الاستراتيجيات الناجحة التي تتبعها، وحافظ على شبكة الدعم الاجتماعي القوية التي بنيتها."
-              }
-              {result.level === "خطر متوسط" && 
-                "لديك بعض نقاط القوة في مواجهة التحديات، لكنك قد تحتاج إلى تعزيز مهاراتك في التعامل مع الضغوط. أقترح عليك التركيز على تطوير استراتيجيات إضافية للتكيف والتواصل بشكل أكبر مع مجموعات الدعم."
-              }
-              {result.level === "خطر مرتفع" && 
-                "أرى أنك تمر بفترة صعبة تتطلب اهتماماً خاصاً. من المهم جداً ألا تواجه هذه التحديات وحدك. أنصحك بشدة بالتواصل مع مختص وتعزيز شبكة دعمك الاجتماعي."
-              }
-              {result.level === "خطر مرتفع جداً" && 
-                "أنا قلق عليك وأرى أن وضعك يتطلب تدخلاً فورياً. لا تتردد في طلب المساعدة المهنية الآن. تذكر أن طلب المساعدة ليس علامة ضعف، بل هو خطوة شجاعة نحو التعافي."
-              }
-            </p>
-            <div className="space-y-2 text-blue-800">
-              <h5 className="font-semibold">توصيات إضافية من عارف:</h5>
-              <ul className="list-disc list-inside space-y-1">
-                {result.level === "خطر منخفض" && (
-                  <>
-                    <li>تابع تسجيل يومياتك وملاحظاتك حول التحديات التي تواجهها وكيف تتغلب عليها</li>
-                    <li>شارك تجربتك مع الآخرين لتشجيعهم ودعمهم في رحلتهم</li>
-                    <li>ضع خطة وقائية للتعامل مع أي تحديات مستقبلية محتملة</li>
-                  </>
-                )}
-                {result.level === "خطر متوسط" && (
-                  <>
-                    <li>ابدأ في ممارسة تمارين التأمل والاسترخاء يومياً</li>
-                    <li>حدد الأوقات والمواقف التي تشعر فيها بالضعف وضع خطة للتعامل معها</li>
-                    <li>اجعل التواصل مع مجموعة الدعم جزءاً أساسياً من روتينك اليومي</li>
-                  </>
-                )}
-                {result.level === "خطر مرتفع" && (
-                  <>
-                    <li>اتصل بمختص نفسي أو معالج متخصص في الإدمان في أقرب وقت</li>
-                    <li>شارك مخاوفك وتحدياتك مع شخص تثق به من شبكة دعمك</li>
-                    <li>قم بتحديث خطة التعافي الخاصة بك مع مختص</li>
-                  </>
-                )}
-                {result.level === "خطر مرتفع جداً" && (
-                  <>
-                    <li>اتصل بخط المساعدة على مدار 24 ساعة الآن</li>
-                    <li>تواصل مع مركز علاج متخصص للحصول على المساعدة الفورية</li>
-                    <li>لا تبق وحيداً - ابق مع شخص تثق به حتى تحصل على المساعدة المهنية</li>
-                  </>
-                )}
-              </ul>
+            <div className="space-y-4">
+              <p className="text-blue-900 text-lg leading-relaxed">
+                {result.level === "خطر منخفض" && 
+                  "يسعدني أن أرى أنك تتمتع بقدرة جيدة على التحكم في رغباتك وإدارة المواقف الصعبة. استمر في تطبيق الاستراتيجيات الناجحة التي تتبعها، وحافظ على شبكة الدعم الاجتماعي القوية التي بنيتها."
+                }
+                {result.level === "خطر متوسط" && 
+                  "أرى أن لديك نقاط قوة مهمة في مواجهة التحديات، لكنك قد تحتاج إلى تعزيز مهاراتك في التعامل مع الضغوط. أقترح عليك التركيز على تطوير استراتيجيات إضافية للتكيف والتواصل بشكل أكبر مع مجموعات الدعم."
+                }
+                {result.level === "خطر مرتفع" && 
+                  "أدرك أنك تمر بفترة صعبة تتطلب اهتماماً خاصاً. من المهم جداً ألا تواجه هذه التحديات وحدك. أنصحك بشدة بالتواصل مع مختص وتعزيز شبكة دعمك الاجتماعي. أنت لست وحدك في هذه الرحلة."
+                }
+                {result.level === "خطر مرتفع جداً" && 
+                  "أشعر بالقلق عليك وأرى أن وضعك يتطلب تدخلاً فورياً. لا تتردد في طلب المساعدة المهنية الآن. تذكر أن طلب المساعدة ليس علامة ضعف، بل هو خطوة شجاعة وحكيمة نحو التعافي. دعني أساعدك في اتخاذ الخطوة الأولى."
+                }
+              </p>
+              <div className="mt-6">
+                <h5 className="font-semibold text-blue-800 mb-3">توصيات عارف:</h5>
+                <ul className="space-y-2">
+                  {result.level === "خطر منخفض" && (
+                    <>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>واصل المشاركة في الأنشطة الاجتماعية الإيجابية</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>احتفل بنجاحاتك الصغيرة وشاركها مع من تثق بهم</span>
+                      </li>
+                    </>
+                  )}
+                  {result.level === "خطر متوسط" && (
+                    <>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>قم بتحديد المواقف التي تسبب لك الضغط وضع خطة للتعامل معها</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>تواصل مع مجموعات الدعم بشكل منتظم</span>
+                      </li>
+                    </>
+                  )}
+                  {result.level === "خطر مرتفع" && (
+                    <>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>لا تؤجل طلب المساعدة المهنية - هذا قرار حكيم وشجاع</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>أخبر شخصاً تثق به عن مشاعرك وتحدياتك الحالية</span>
+                      </li>
+                    </>
+                  )}
+                  {result.level === "خطر مرتفع جداً" && (
+                    <>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>اتصل بخط المساعدة الآن - هناك من ينتظر مساعدتك</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <span>لا تبق وحيداً - ابق مع شخص تثق به حتى تحصل على المساعدة المهنية</span>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="text-center text-sm text-gray-600">
-            <p>هذا التقييم للمساعدة الأولية فقط. يُرجى استشارة مختص للحصول على تقييم شامل.</p>
+          {/* أزرار التنقل */}
+          <div className="flex justify-center gap-4 mt-8">
+            <Link
+              to="/self-assessment"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+            >
+              <ArrowRight className="w-5 h-5" />
+              العودة للتقييمات
+            </Link>
           </div>
         </div>
       </div>

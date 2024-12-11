@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Target, Shield, Activity, ArrowRight, ArrowLeft, Loader2, AlertTriangle, Heart, Stethoscope } from 'lucide-react';
+import { Brain, Target, Shield, Activity, ArrowRight, ArrowLeft, Loader2, AlertTriangle, Heart, Stethoscope, Bot } from 'lucide-react';
 
 interface Question {
   id: string;
@@ -338,81 +338,88 @@ function DASTAssessment() {
   const renderResult = () => {
     if (!currentResult) return null;
 
+    const ResultIcon = currentResult.Icon;
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto mt-8"
       >
+        {/* رأس النتيجة */}
         <div className="text-center mb-8">
           <div className={`inline-block p-4 rounded-full ${getResultStyle(currentResult.color)} mb-4`}>
-            {currentResult.Icon && <currentResult.Icon className="w-12 h-12 text-gray-800" />}
+            {ResultIcon && <ResultIcon className="w-12 h-12 text-gray-800" />}
           </div>
-          <div className="space-y-2">
-            {nickname && (
-              <p className="text-xl text-gray-800">
-                مرحباً {nickname}
-              </p>
-            )}
-            <h2 className="text-2xl font-bold text-gray-800">
-              {currentResult.level}
-            </h2>
-          </div>
-          <p className="text-gray-600 mb-6 mt-4">
-            {currentResult.description}
-          </p>
+          <h2 className="text-2xl font-bold mb-2">{currentResult.level}</h2>
+          <p className="text-lg text-gray-700">{currentResult.description}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-              <Activity className="w-5 h-5 text-violet-600" />
-              التوصيات
-            </h3>
-            <ul className="space-y-3">
-              {currentResult.recommendations.map((rec, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-sm mt-1">✓</span>
-                  <span className="mr-3 text-gray-600">{rec}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-              <Target className="w-5 h-5 text-violet-600" />
-              الخطوات القادمة
-            </h3>
-            <ul className="space-y-3">
-              {currentResult.nextSteps.map((step, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-violet-500 text-white flex items-center justify-center text-sm mt-1">{index + 1}</span>
-                  <span className="mr-3 text-gray-600">{step}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* التوصيات */}
+        <div className={`p-6 rounded-lg mb-6 border-2 ${getResultStyle(currentResult.color)}`}>
+          <h3 className="text-xl font-semibold mb-4">التوصيات المقترحة:</h3>
+          <ul className="space-y-3">
+            {currentResult.recommendations.map((rec, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">{rec}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <div className="flex flex-col items-center gap-4">
-            <p className="text-gray-600 text-center">
-              تذكر دائماً أن طلب المساعدة هو علامة قوة وليس ضعفاً. أنت لست وحدك في هذه الرحلة.
+        {/* الخطوات التالية */}
+        <div className="bg-blue-50 p-6 rounded-lg mb-6 border-2 border-blue-200">
+          <div className="flex items-center gap-3 mb-4">
+            <Bot className="w-8 h-8 text-blue-600" />
+            <h3 className="text-xl font-bold text-blue-800">تحليل عارف الذكي</h3>
+          </div>
+          <div className="space-y-4">
+            <p className="text-blue-900 text-lg leading-relaxed">
+              {currentResult.level === "لا توجد مؤشرات واضحة" && 
+                "يسعدني أن أرى نتائجك الإيجابية. حافظ على نمط حياتك الصحي واستمر في تطوير مهاراتك في التعامل مع الضغوط."
+              }
+              {currentResult.level === "مؤشرات خفيفة" && 
+                "أرى أن لديك بعض التحديات البسيطة. لكن مع الدعم المناسب والتوجيه، يمكنك تجاوزها بنجاح. دعني أساعدك في وضع خطة للتعامل معها."
+              }
+              {currentResult.level === "مؤشرات متوسطة" && 
+                "من خلال تحليلي لإجاباتك، أرى أنك تواجه تحديات تستحق الاهتمام. لكن تذكر أن هذه التحديات يمكن تجاوزها مع الدعم المناسب والإرادة القوية."
+              }
+              {currentResult.level === "مؤشرات شديدة" && 
+                "أشعر بالقلق من شدة التحديات التي تواجهها. لكن ثق بي، مع المساعدة المهنية المناسبة والدعم المستمر، يمكنك تجاوز هذه المرحلة."
+              }
+              {currentResult.level === "مؤشرات شديدة جداً" && 
+                "أرى أن وضعك يتطلب اهتماماً فورياً وعناية خاصة. دعني أساعدك في اتخاذ الخطوة الأولى نحو التعافي. أنت لست وحدك في هذه الرحلة."
+              }
             </p>
-            <button
-              onClick={() => {
-                setShowResult(false);
-                setCurrentQuestionIndex(-1);
-                setAnswers({});
-                setProgress(0);
-              }}
-              className="bg-violet-600 text-white py-3 px-6 rounded-lg hover:bg-violet-700 transition-colors duration-300 flex items-center gap-2"
-            >
-              <ArrowRight className="w-5 h-5" />
-              بدء تقييم جديد
-            </button>
+            <div className="mt-6">
+              <h4 className="font-semibold text-blue-800 mb-3">الخطوات التالية المقترحة:</h4>
+              <ul className="space-y-3">
+                {currentResult.nextSteps.map((step, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <ArrowRight className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+        </div>
+
+        {/* أزرار التنقل */}
+        <div className="flex justify-center gap-4 mt-8">
+          <button
+            onClick={() => {
+              setShowResult(false);
+              setCurrentQuestionIndex(-1);
+              setAnswers({});
+              setProgress(0);
+            }}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2"
+          >
+            <ArrowRight className="w-5 h-5" />
+            بدء تقييم جديد
+          </button>
         </div>
       </motion.div>
     );
