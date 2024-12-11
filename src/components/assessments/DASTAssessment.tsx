@@ -119,7 +119,7 @@ const assessmentLevels: Record<string, AssessmentResult> = {
       "شارك في برامج توعوية حول الإدمان",
       "كن قدوة إيجابية في مجتمعك"
     ],
-    color: "bg-green-500",
+    color: "green",
     Icon: Heart
   },
   mild: {
@@ -137,7 +137,7 @@ const assessmentLevels: Record<string, AssessmentResult> = {
       "تعلم تقنيات الاسترخاء والتأمل",
       "ابحث عن أنشطة بديلة إيجابية"
     ],
-    color: "bg-yellow-500",
+    color: "yellow",
     Icon: Shield
   },
   moderate: {
@@ -155,7 +155,7 @@ const assessmentLevels: Record<string, AssessmentResult> = {
       "شارك في برنامج تأهيل منظم",
       "اعمل على تقوية علاقاتك العائلية"
     ],
-    color: "bg-orange-500",
+    color: "orange",
     Icon: Target
   },
   severe: {
@@ -173,7 +173,7 @@ const assessmentLevels: Record<string, AssessmentResult> = {
       "شارك في جلسات علاج مكثفة",
       "اتبع خطة علاجية متكاملة"
     ],
-    color: "bg-red-500",
+    color: "red",
     Icon: Stethoscope
   },
   verySevere: {
@@ -191,8 +191,25 @@ const assessmentLevels: Record<string, AssessmentResult> = {
       "التزم ببرنامج علاجي شامل",
       "اطلب الدعم العائلي والمهني"
     ],
-    color: "bg-red-700",
+    color: "red",
     Icon: AlertTriangle
+  }
+};
+
+const getResultStyle = (color: string) => {
+  switch (color) {
+    case 'red':
+      return 'bg-red-50 border-red-200';
+    case 'orange':
+      return 'bg-orange-50 border-orange-200';
+    case 'yellow':
+      return 'bg-yellow-50 border-yellow-200';
+    case 'green':
+      return 'bg-green-50 border-green-200';
+    case 'blue':
+      return 'bg-blue-50 border-blue-200';
+    default:
+      return 'bg-gray-50 border-gray-200';
   }
 };
 
@@ -328,7 +345,7 @@ function DASTAssessment() {
         className="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto mt-8"
       >
         <div className="text-center mb-8">
-          <div className={`inline-block p-4 rounded-full ${currentResult.color} bg-opacity-20 mb-4`}>
+          <div className={`inline-block p-4 rounded-full ${getResultStyle(currentResult.color)} mb-4`}>
             {currentResult.Icon && <currentResult.Icon className="w-12 h-12 text-gray-800" />}
           </div>
           <div className="space-y-2">

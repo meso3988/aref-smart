@@ -186,6 +186,21 @@ const RelapsePredictionAssessment = () => {
     return riskLevels.veryHigh;
   };
 
+  const getResultStyle = (color: string) => {
+    switch (color) {
+      case 'red':
+        return 'bg-red-100 border-red-500';
+      case 'orange':
+        return 'bg-orange-100 border-orange-500';
+      case 'yellow':
+        return 'bg-yellow-100 border-yellow-500';
+      case 'green':
+        return 'bg-green-100 border-green-500';
+      default:
+        return 'bg-gray-100 border-gray-500';
+    }
+  };
+
   const currentQuestion = questions[currentQuestionIndex];
   const isAnswered = currentQuestion && answers[currentQuestion.id];
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -197,7 +212,7 @@ const RelapsePredictionAssessment = () => {
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-bold text-center mb-6">نتيجة التقييم</h2>
           
-          <div className={`p-4 rounded-lg mb-6 bg-${result.color}-100`}>
+          <div className={`p-4 rounded-lg mb-6 border ${getResultStyle(result.color)}`}>
             <h3 className="text-xl font-semibold mb-2">{result.level}</h3>
             <p className="mb-4">{result.description}</p>
             <div className="space-y-2">
